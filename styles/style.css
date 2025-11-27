@@ -1594,6 +1594,29 @@ section[id] {
 .booking-links a:hover img {
   transform: scale(1.05);
 }
+/* Bouton plus discret en mobile */
+@media (max-width: 720px) {
+  .btn-contact {
+    width: auto;                 /* plus 100%, bouton à sa largeur naturelle */
+    padding: 0.7rem 1.6rem;      /* moins de padding = moins haut */
+    font-size: 1rem;
+    gap: 0.4rem;
+    white-space: nowrap;         /* évite le retour à la ligne entre l’icône et le texte */
+    margin-inline: auto;         /* centre le bouton */
+  }
+
+  .btn-contact::before {
+    font-size: 1.1rem;           /* enveloppe un peu plus petite */
+  }
+}
+
+/* très petits mobiles si besoin */
+@media (max-width: 480px) {
+  .btn-contact {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+  }
+}
 
 /* responsive */
 @media (max-width: 720px) {
