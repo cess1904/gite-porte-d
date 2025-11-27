@@ -1,0 +1,372 @@
+/* ========= PAGE TARIFS – GÎTE PORTE D ========= */
+body {
+  background: linear-gradient(
+      rgba(203, 227, 216, 0.9),
+      rgba(203, 227, 216, 0.9)
+    ),
+    url('../../src/assets/tramedefond/bois.webp');
+  background-repeat: repeat;
+  background-size: 1500px auto;
+  background-position: top center;
+  background-attachment: scroll;
+  color: var(--texte, #2a2422);
+}
+
+/* Contenu principal */
+main#tarifs-page {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  padding: 5.5rem 1.5rem 3rem; /* marge haute pour passer sous le header */
+}
+
+/* HEADER de la page Tarifs (aligné avec Accès, mais adapté) */
+#tarifs-page .section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+#tarifs-page .section-sur-titre {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42, 36, 34, 0.7);
+  margin-bottom: 0.4rem;
+}
+
+/* Titre principal */
+#tarifs-page .section-header h1 {
+  font-size: clamp(2rem, 4.5vw, 2.6rem);
+  color: #255f48;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* Petit trait sous le titre */
+#tarifs-page .section-header .divider {
+  width: 80px;
+  height: 3px;
+  background: var(--vert, #255f48);
+  border-radius: 2px;
+  margin: 0 auto 1.2rem;
+}
+
+/* Paragraphe d’intro  */
+#tarifs-page .intro-tarifs {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 0.88rem;   /* un chouilla plus petit */
+  line-height: 1.7;
+  color: rgba(42, 36, 34, 0.9);
+}
+
+
+#tarifs-page .tarifs-section {
+  margin-top: 1.8rem;
+}
+
+/* Grille responsive des cartes */
+#tarifs-page .tarifs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* Carte tarif */
+#tarifs-page .tarif-card {
+  background: var(--clair, #ffffff);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(37, 95, 72, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center; /* tout centré dans la carte */
+}
+
+#tarifs-page .tarif-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.09);
+}
+
+/* Titres des cartes */
+#tarifs-page .tarif-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: var(--texte, #2a2422);
+}
+
+/* Sous-titre (description période) */
+#tarifs-page .tarif-card .sous-titre {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: rgba(42, 36, 34, 0.7);
+}
+
+/* Prix */
+#tarifs-page .tarif-card .prix {
+font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 0.3rem;
+  color: var(--texte, #2a2422);
+  text-align: center;
+}
+#tarifs-page .tarif-card .prix span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--vert, #255f48);
+}
+/* Variante pour la carte "jours spéciaux" */
+#tarifs-page .tarif-card.special {
+  border: 1px solid rgba(37, 95, 72, 0.2);
+  background: linear-gradient(
+    135deg,
+    rgba(203, 227, 216, 0.3),
+    #ffffff
+  );
+}
+#tarifs-page .horsinclu {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: center;
+  color: rgba(42, 36, 34, 0.7);
+  transition: all 0.25s ease; /* transition douce */
+  cursor: pointer;
+}
+
+/* Effet au survol */
+#tarifs-page .horsinclu:hover {
+  color: var(--vert, #255f48); /* devient vert */
+  transform: scale(1.05);     /* légèrement plus grand */
+}
+
+
+
+/* Note en dessous des cartes */
+#tarifs-page .note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(42, 36, 34, 0.75);
+  line-height: 1.5;
+}
+
+/* === BANDEAU BAS === */
+.bloc-alt {
+  background: #255f48;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.bloc-alt .wrapper {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bloc-alt h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.bloc-alt p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.btn-secondaire {
+  background: #fff;
+  color: #255f48;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondaire:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .bloc-alt .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+
+
+
+/* ========= RESPONSIVE ========= */
+
+@media (max-width: 600px) {
+  main#tarifs-page {
+    margin-top: 2rem;
+    padding-top: 5.5rem;
+  }
+
+  #tarifs-page .tarif-card {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+
+
+
+
+
+/* ====== CALENDRIER TARIFS (mois par mois) ====== 
+
+#tarifs-page .tarifs-calendrier {
+  margin-top: 1.8rem;
+  margin-bottom: 2.5rem;
+}
+
+#tarifs-page .tarifs-calendrier h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: var(--texte, #2a2422);
+}
+
+#tarifs-page .calendrier-texte {
+  max-width: 650px;
+  margin: 0 auto 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(42, 36, 34, 0.9);
+}
+
+/* Légende 
+#tarifs-page .calendrier-legende {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+#tarifs-page .pastille {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+}
+
+#tarifs-page .pastille-semaine {
+  background: rgba(203, 227, 216, 1); 
+  border: 1px solid rgba(37, 95, 72, 0.4);
+}
+
+#tarifs-page .pastille-weekend {
+  background: #f3e2cf; 
+  border: 1px solid rgba(141, 94, 46, 0.45);
+}
+
+/* Grille des mois 
+#calendrier-tarifs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Un mois 
+#tarifs-page .cal-mois {
+  background: rgba(247, 247, 245, 0.95);
+  border-radius: 16px;
+  padding: 0.9rem 0.9rem 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(37, 95, 72, 0.06);
+}
+
+#tarifs-page .cal-mois-titre {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  color: #2a2422;
+}
+
+/* Jours de la semaine (en-tête) 
+#tarifs-page .cal-jours-semaine {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 0.7rem;
+  text-align: center;
+  margin-bottom: 0.2rem;
+  color: rgba(42, 36, 34, 0.7);
+}
+
+#tarifs-page .cal-jours-semaine span {
+  padding: 0.15rem 0;
+}
+
+/* Cases de jours 
+#tarifs-page .cal-jours {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.1rem;
+  font-size: 0.74rem;
+}
+
+#tarifs-page .cal-jour {
+  min-height: 34px;
+  border-radius: 8px;
+  padding: 0.15rem 0.1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#tarifs-page .cal-jour-numero {
+  font-weight: 600;
+  margin-bottom: 0.05rem;
+}
+
+/* Jours vides (début / fin de mois) 
+#tarifs-page .cal-jour.vide {
+  background: transparent;
+}
+
+/* Jours à 110€ 
+#tarifs-page .cal-jour.semaine-110 {
+  background: rgba(203, 227, 216, 0.95);
+  border: 1px solid rgba(37, 95, 72, 0.2);
+}
+
+/* Jours à 150€ (week-end ou spéciaux) 
+#tarifs-page .cal-jour.special-150 {
+  background: #f8e3ce;
+  border: 1px solid rgba(141, 94, 46, 0.25);
+}
+
+#tarifs-page .cal-jour-prix {
+  font-size: 0.65rem;
+  color: rgba(42, 36, 34, 0.85);
+}
+
+/* Responsif 
+@media (max-width: 600px) {
+  #calendrier-tarifs-container {
+    grid-template-columns: 1fr;
+  }
+
+  #tarifs-page .cal-mois {
+    padding: 0.8rem 0.7rem 0.9rem;
+  }
+}
+*/

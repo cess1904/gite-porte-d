@@ -1,0 +1,1730 @@
+
+
+/* =========================================================
+   0) RESET + BASE
+========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable both-edges;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: var(--text);
+  background: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+section[id] {
+  scroll-margin-top: 55px; /* adapte si ton header change de taille */
+}
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: 110px; /* un peu plus sur mobile */
+  }
+}
+
+/* =========================================================
+   1) VARIABLES GLOBALES
+========================================================= */
+:root {
+  --accent: #255f48; /* vert principal Porte D */
+  --accent-dark: #1e4c3a; /* vert plus profond */
+  --text: #2a2422; /* noir/brun profond */
+  --bg: #ffffff;
+  --bg-alt: #f6f6f6;
+  --container: 1100px;
+  --radius: 16px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+
+  /* Esprit (vidéo) */
+  --overlay: 0.28; /* 0.15 = léger | 0.35 = plus contrasté */
+}
+
+/* =========================================================
+   2) UTILITAIRES GÉNÉRAUX
+========================================================= */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(16px, 3vw, 32px);
+}
+
+.section {
+  padding: clamp(40px, 7vw, 90px) 0;
+  background: var(--bg);
+}
+.section + .section {
+  border-top: 1px solid #eee;
+}
+
+.section-accent {
+  background: var(--bg-alt);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+.facts {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.no-scroll {
+  overflow: hidden;
+} /* pour verrouiller le body avec le burger */
+
+/* Accessibilité : lien d’évitement */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* =========================================================
+   3) BOUTONS (GLOBAL)
+========================================================= */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(37, 95, 72, 0.25);
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: var(--accent-dark);
+  box-shadow: 0 6px 18px rgba(37, 95, 72, 0.35);
+}
+.btn-small {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.95rem;
+}
+
+
+/* ================================
+   Reveal uniquement pour les TITRES
+   ================================ */
+
+.title-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.title-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+
+/* =========================================================
+   HEADER FIXE + BURGER + NAV
+========================================================= */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1.5rem;
+  z-index: 99999;
+  box-shadow: none;
+}
+
+/* === BOUTON BURGER ACCORDÉON MAGNÉTIQUE === */
+.burger {
+  background: none;
+  border: none;
+  width: 36px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 10001;
+  transition: transform 0.3s ease;
+}
+
+/* Barres de base */
+.burger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  transition: all 0.35s ease;
+}
+
+.burger:hover span {
+  filter: brightness(1.1);
+}
+/* Barre du haut — vert clair doux */
+.burger span:nth-child(1) {
+  background: #6da68a;
+}
+
+/* Barre du milieu — ton principal vert Porte D */
+.burger span:nth-child(2) {
+  background: #4c866f;
+}
+
+/* Barre du bas — vert profond légèrement chaud */
+.burger span:nth-child(3) {
+  background: #1f4a39;
+}
+
+/* Effet "barres qui se rapprochent" */
+.burger:hover span:nth-child(1) {
+  transform: translateY(3px);
+}
+.burger:hover span:nth-child(3) {
+  transform: translateY(-3px);
+}
+
+/* Animation X */
+.burger.is-active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.burger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.burger.is-active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* === MENU DÉROULANT LATÉRAL === */
+.nav {
+  display: none;
+  flex-direction: column;
+  position: fixed; /* ← change absolute en fixed */
+  top: 0; /* ← colle tout en haut */
+  right: 0;
+  width: min(320px, 90vw);
+  height: 100vh; /* ← prend toute la hauteur de la fenêtre */
+  background: #fff;
+  border-left: 1px solid #eee;
+  padding: 1.2rem 1.3rem 1.5rem;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+/* quand ouvert */
+
+.nav.open {
+  display: flex;
+  transform: translateX(0);
+}
+
+/* liens */
+.nav > a {
+  color: var(--vert, #366653);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: transform 0.4s ease, opacity 0.2s ease;
+}
+
+.nav > a:hover {
+  transform: translateX(4px);
+  opacity: 0.8;
+}
+
+
+/* Sous-catégories dans le menu */
+.nav-sub {
+  margin: 0.15rem 0 0.7rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(37, 95, 72, 0.2);
+}
+
+.nav-sub-link {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(38, 89, 70, 0.9);
+  padding: 0.12rem 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.nav-sub-link:hover {
+  transform: translateX(3px);
+  opacity: 0.8;
+}
+
+/* 2. Bloc coordonnées  */
+
+.nav .nav-contact a {
+  text-decoration: none !important;
+  position: relative;
+  display: inline-block;
+  color: var(--vert, #255f48);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* On supprime totalement le petit trait du menu */
+.nav .nav-contact a::after {
+  content: none !important;
+}
+
+/* Même effet doux pour mail, téléphone et adresse */
+.nav .nav-contact .mail:hover,
+.nav .nav-contact .tel:hover,
+.nav .nav-contact .adresse:hover {
+  transform: scale(1.05); /* léger agrandissement */
+  opacity: 0.85; /* petit fondu subtil */
+}
+
+/* Bloc coordonnées */
+.nav-contact {
+  border-top: 1px solid rgba(37, 95, 72, 0.25); /* ← la ligne */
+  padding-top: 1rem; /* petit espace après la ligne */
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 1rem;
+}
+
+.nav-contact h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent, #255f48);
+  margin-bottom: 0.4rem;
+}
+
+/* petit ajustement mobile */
+@media (max-width: 480px) {
+  .nav {
+    width: min(100vw, 360px);
+  }
+}
+
+/* ===== HERO ESPRIT DU LIEU – FOND & PARALLAX ===== */
+
+#esprit.section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#esprit {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: 0;
+  color: var(--accent); /* texte en vert */
+  background: #ffffff
+    url('../assets/images/espritdulieu/coin-repas-gite-porte-d-table-bois-lumineux.webp')
+    center / cover no-repeat;
+}
+
+@media (min-width: 900px) {
+  #esprit {
+    background-attachment: fixed;
+  }
+}
+
+/* Voile supplémentaire, subtil mais moderne */
+#esprit .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.38) 0%,
+    rgba(255, 255, 255, 0.33) 55%,
+    rgba(255, 255, 255, 0.27) 100%
+  );
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  pointer-events: none;
+}
+
+/* Contenu centré */
+#esprit .content {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  max-width: 820px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+#esprit .content.reveal-on-scroll {
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+
+/* ===== BULLE DE VERRE POUR LE LOGO ===== */
+
+.logo-bubble {
+  display: flex;
+  margin: 0 auto 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  padding: 1rem 1.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.15);
+}
+
+.logo-esprit {
+  width: min(320px, 55vw);
+  display: block;
+}
+
+/* ===== TITRE & TEXTES ===== */
+
+#esprit h1 {
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  margin: 0.5rem 0 0.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--accent); /* ton vert */
+  text-shadow: none;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+#esprit .surtitre {
+  font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+  margin: 0 0 0.7rem;
+  color: #2a2422; /* ton texte sombre */
+  letter-spacing: 0.04em;
+  text-transform: none;
+  margin-bottom: 0.6rem;
+}
+
+#esprit p {
+  font-size: clamp(1.15rem, 1.9vw, 1.25rem);
+  line-height: 1.8;
+  margin: 0 auto 1rem;
+  max-width: 640px;
+  color: #2a2422;
+  margin-bottom: 0.9rem;
+}
+#esprit h1,
+#esprit .surtitre,
+#esprit p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ===== BOUTONS ===== */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+#esprit .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Bouton principal (Découvrir les espaces) */
+#esprit .btn-main {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(37, 95, 72, 0.35);
+}
+
+#esprit .btn-main:hover {
+  background: #2f7558;
+  border-color: #2f7558;
+  transform: translateY(-2px);
+}
+
+/* Bouton secondaire (Demande de réservation) */
+#esprit .btn-ghost {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  color: var(--accent);
+  backdrop-filter: blur(4px);
+}
+
+#esprit .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  #esprit {
+    min-height: 85vh;
+    padding-top: 5.5rem;
+  }
+
+  #esprit .content {
+    padding: 1.6rem 1.1rem 2.4rem;
+  }
+
+  .logo-bubble {
+    padding: 0.9rem 1rem;
+    border-radius: 999px;
+  }
+
+  .logo-esprit {
+    width: min(260px, 70vw);
+  }
+
+  #esprit h1 {
+    font-size: clamp(2.1rem, 6vw, 2.8rem);
+
+  }
+
+  #esprit p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+/* =========================================================
+
+            Section 2 : LES ESPACES DU GÎTE
+   
+========================================================= */
+#espaces.section {
+  padding-top: 0; /* enlève le padding de .section */
+}
+
+#espaces {
+  background: linear-gradient(180deg, #e8f3ee 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
+#espaces::before {
+  /* petit effet de texture légère en dégradé pour la profondeur */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(37, 95, 72, 0.05) 100%
+  );
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Contenu */
+#espaces .container {
+  position: relative;
+  z-index: 1;
+  padding-top: -10px; /* plus aucun espace au-dessus */
+  padding-bottom: 2rem; /* juste un peu d'air dessous */
+}
+#espaces .container.reveal-on-scroll {
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+
+/* ===== Titre section "Les espaces du gîte" ===== */
+
+#espaces h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  color: var(--accent);
+  font-weight: 700;
+  text-align: left;
+  letter-spacing: 1px;
+}
+
+/* tablette */
+@media (max-width: 992px) {
+  #espaces h2 {
+    font-size: clamp(2.2rem, 5.5vw, 3rem);
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  #espaces h2 {
+   font-size: clamp(2.1rem, 6vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* petits mobiles */
+@media (max-width: 480px) {
+  #espaces h2 {
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+  }
+}
+
+#espaces h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+  content: none;
+}
+
+.grid-espaces {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-espaces figure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.grid-espaces img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.grid-espaces figure:hover img {
+  transform: scale(1.05);
+}
+
+.grid-espaces figcaption {
+  font-size: 0.95rem;
+  color: #2a2422;
+  text-align: center;
+  padding: 0.8rem 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(37, 95, 72, 0.15);
+  transition: background 0.3s ease;
+}
+
+.grid-espaces figure:hover figcaption {
+  background: rgba(255, 255, 255, 0.9);
+}
+/* ===== Galerie haut de gamme : Les espaces du gîte ===== */
+.gallery-espaces {
+  display: grid;
+  gap: clamp(10px, 1.8vw, 20px);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
+}
+
+/* Carte visuelle premium */
+.gallery-espaces .card {
+  position: relative;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  isolation: isolate;
+  background: #fff;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Carte mise en avant (1re, span 2 colonnes sur écrans larges) */
+@media (min-width: 992px) {
+  .gallery-espaces .card.span-2 {
+    grid-column: span 2;
+  }
+}
+
+/* Médias : ratio élégant + zoom très doux au hover */
+.gallery-espaces .media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4/3; /* ratio par défaut */
+  position: relative;
+}
+
+.gallery-espaces .card.span-2 .media {
+  aspect-ratio: 16/9; /* ratio cinématographique pour la mise en avant */
+}
+
+.gallery-espaces img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+/* Overlay dégradé vert + micro-grain (ultra léger) */
+.gallery-espaces .card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(42, 36, 34, 0.45) 100%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 65%
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.75;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Légende élégante : titre + sous-titre */
+.gallery-espaces .caption {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 10px;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: translateY(6px);
+  opacity: 0.98;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  text-align: left;
+}
+
+.gallery-espaces .caption strong {
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  line-height: 1.15;
+}
+
+.gallery-espaces .caption span {
+  font-weight: 500;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  opacity: 0.9;
+}
+
+/* Effets au survol */
+.gallery-espaces .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
+}
+.gallery-espaces .card:hover img {
+  transform: scale(1.04);
+}
+.gallery-espaces .card:hover::after {
+  opacity: 0.6;
+}
+.gallery-espaces .card:hover .caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Accessibilité : moins d’animation si demandé */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-espaces .card,
+  .gallery-espaces img,
+  .gallery-espaces .caption {
+    transition: none;
+  }
+}
+
+/* Petits écrans : confort de lecture et de touch */
+@media (max-width: 768px) {
+  .gallery-espaces {
+    gap: 14px;
+  }
+  .gallery-espaces .caption {
+    left: 10px;
+    right: 10px;
+    bottom: 8px;
+  }
+}
+
+/* ==== Lightbox minimal ==== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120000; /* plus haut que le header */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+}
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox__img {
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+  z-index: 120001;
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox__nav.prev {
+  left: 16px;
+}
+.lightbox__nav.next {
+  right: 16px;
+}
+
+@media (max-width: 768px) {
+  .lightbox__nav {
+    width: 40px;
+    height: 40px;
+  }
+  .lightbox__close {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* =========================================================
+  
+            Section 3 : Votre séjours a porte D
+   
+========================================================= */
+
+.sejour-section {
+  padding-top: 0;
+  padding-bottom: 6rem;
+}
+
+.sejour-section .sejour-intro {
+  max-width: 900px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.sejour-section h2 {
+  margin-bottom: 1.5rem;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  color: var(--accent);
+  font-weight: 700;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 1px;
+}
+/* mobile */
+@media (max-width: 768px) {
+  .sejour-section h2 {
+   font-size: clamp(2.1rem, 6vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* petits mobiles */
+@media (max-width: 480px) {
+  .sejour-section h2 {
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+  }
+}
+
+.sejour-section .sejour-intro p {
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #455140;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.3px;
+}
+
+/* Grille des cartes */
+.sejour-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.8rem;
+}
+
+.sejour-card {
+  background: var(--clair, #ffffff);
+  border-radius: 18px;
+  padding: 1.8rem 1.6rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(37, 95, 72, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* important */
+  gap: 0.9rem;
+  text-align: center; /* ⭐️ centre tout dans la carte */
+  /* animation douce */
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+  border: 1.5px solid #255f48;
+}
+
+.sejour-section .sejour-intro.reveal-on-scroll {
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+
+.sejour-card:hover {
+  transform: translateY(-4px) scale(1.01); /* légère montée + mini zoom */
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.09); /* ombre plus marquée */
+  background-color: #ffffff; /* au cas où ton fond change */
+}
+
+/* Grand picto au-dessus du titre */
+.sejour-picto {
+  width: 130px; /* augmente si tu veux encore plus grand */
+  height: auto;
+  margin: 0 auto 0.7rem;
+  display: block;
+  opacity: 0.92; /* léger adoucissement → optionnel */
+}
+
+.sejour-card h3 {
+  font-size: 1.2rem;
+  color: var(--vert, #255f48);
+  margin: 0;
+}
+
+.sejour-card p {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.sejour-btn {
+  display: inline-block;
+  margin: 1rem auto 0; /* ⭐️ centre le bouton */
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+
+  background: var(--vert, #255f48);
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.sejour-btn:hover {
+  background: transparent;
+  color: var(--vert, #255f48);
+  border: 1.2px solid var(--vert, #255f48);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(37, 95, 72, 0.18);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sejour-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .sejour-card {
+    max-width: 390px;       
+    margin-inline: auto;  
+  }
+}
+
+
+
+/* =========================================================
+      
+      Section 4 : SECTION Evasions à deux pas du gite
+   
+========================================================= */
+#evasions.section {
+  padding-top: 0; /* enlève le padding de .section */
+}
+#evasions {
+  background: linear-gradient(180deg, #8baa9c 0%, #ffffff 100%);
+}
+
+#evasions h2 {
+  text-align: center;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  color: var(--accent);
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  #evasions h2 {
+   font-size: clamp(2.1rem, 6vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* petits mobiles */
+@media (max-width: 480px) {
+  #evasions h2 {
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+  }
+}
+
+
+/* Grille de cartes */
+.grid-evasions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 👉 4 cartes côte à côte */
+  gap: 2rem;
+  align-items: stretch; /* même hauteur */
+}
+
+/* Cartes */
+.carte {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+ transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.carte:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.carte img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Contenu */
+.carte .contenu {
+  padding: 1.5rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.carte h3 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.carte p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Bouton */
+.carte .btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+.carte .btn:hover {
+  background: var(--accent-dark);
+}
+
+/* Responsive — 2 colonnes sur tablette, 1 sur mobile */
+@media (max-width: 1200px) {
+  .grid-evasions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-evasions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .carte {
+    max-width: 390px;       
+    margin-inline: auto;  
+  }
+}
+
+/* ==============================================================
+
+   section 5 : avis cleints
+
+   ============================================================== */
+
+#avis.section {
+  margin: 0;
+}
+
+.avis-portd {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+
+  background:
+    url('../assets/tramedefond/bois-avec-vert.webp')
+    center / cover no-repeat;
+  background-position-y: 0; /* point de départ, le JS gère le reste */
+}
+
+/* Voile clair */
+.avis-portd::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.34);
+  pointer-events: none;
+}
+
+/* Contenu au-dessus du voile */
+.avis-portd > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Titre */
+
+
+#avis h2 {
+  color: var(--accent);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  margin: 0 0 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  #avis h2 {
+    font-size: clamp(2.1rem, 6vw, 2.8rem);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.8px;
+    text-align: center;
+  }
+}
+
+/* petits mobiles */
+@media (max-width: 480px) {
+  #avis h2 {
+    font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+  }
+}
+
+
+
+
+/* Sous-titre */
+.avis-header p {
+  color: #ffffff;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  letter-spacing: 1px;
+}
+
+/* Conteneur des cartes */
+.avis-container {
+  position: relative;
+  max-width: 800px;
+   margin: 3rem auto 0;
+  height: 160px;
+}
+
+/* Carte */
+.avis-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease, box-shadow 1.2s ease;
+  max-width: 80%;                      
+  margin: 0 auto;                      
+  padding: 1.4rem 2rem;                 
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Carte active */
+.avis-card.active {
+  opacity: 1;
+  transform: translateY(0);
+  box-shadow: 0 14px 30px rgba(37, 95, 72, 0.18);
+}
+
+/* Texte */
+.avis-text {
+  color: #2a2422;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+/* Auteur */
+.avis-author {
+  color: #255f48;
+  font-weight: 600;
+}
+
+
+/* --- Galerie accordéon --- 
+.galerie-accordeon {
+  display: flex;
+  gap: 0.8rem;
+  height: 380px; /* ⬆️ plus haut (avant 210px) 
+  max-width: 1100px;
+  margin: 0.5rem auto 0.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.galerie-accordeon .panel {
+  flex: 0.7; /* un peu plus large au repos → moins de “saut” 
+  background-image: var(--img);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  transition: flex 1.1s cubic-bezier(0.4, 0, 0.2, 1), filter 1.1s ease,
+    transform 1.1s ease; /* transition plus longue + courbe douce 
+  filter: brightness(0.75);
+}
+
+.galerie-accordeon .panel:hover {
+  flex: 2.4; /*  ouverture moins brutale 
+  filter: brightness(1);
+  transform: scale(1.005); /* tout petit zoom pour ne pas faire “pop” 
+}
+
+.galerie-accordeon .panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0));
+  opacity: 0.25;
+  transition: opacity 0.6s ease;
+}
+
+.galerie-accordeon .panel:hover::after {
+  opacity: 0;
+}
+
+/* --- Responsive --- 
+@media (max-width: 768px) {
+  .galerie-accordeon {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .galerie-accordeon .panel {
+    flex: none;
+    height: 220px; /* un peu plus haute aussi sur mobile 
+    transform: none;
+  }
+
+  .galerie-accordeon .panel:hover {
+    flex: none;
+  }
+} */
+
+/* ========================================================  
+
+   section 6 : section contact et reservation
+
+   ======================================================== */
+
+
+.contact-section {
+  background: linear-gradient(180deg, #e8f3ee 0%, #ffffff 100%);
+  text-align: center;
+  position: relative; 
+}
+.contact-section .intro {
+  margin-bottom: 2.5rem;
+  font-size: 1.15rem;
+  color: #2a2422;
+  opacity: 0.95;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #255f48, #8bbfa9);
+  content: none;
+}
+@media (max-width: 768px) {
+  .contact-section {
+    padding-top: 2rem !important;
+  }
+}
+
+
+
+.contact-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-section h2 {
+  color: #255f48;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.6rem;
+}
+
+
+@media (max-width: 768px) {
+  #contact h2 {
+    font-size: clamp(2.1rem, 6vw, 2.8rem);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.8px;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  #contact h2 {
+      font-size: 1.7rem;
+    line-height: 1.1;
+    letter-spacing: 0.6px;
+  }
+}
+
+
+.contact-section .intro {
+  max-width: 650px;
+  margin: 0 auto 2.8rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #455140;
+  opacity: 0.9;
+}
+
+/* bouton mail */
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, #255f48 0%, #1d4b3b 100%);
+  color: #fff;
+  padding: 1.2rem 2.8rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 20px rgba(37, 95, 72, 0.25);
+  transition: all 0.3s ease;
+  
+}
+.btn-contact:hover {
+  background: linear-gradient(135deg, #2a7656 0%, #255f48 100%);
+  box-shadow: 0 10px 25px rgba(37, 95, 72, 0.35);
+  transform: translateY(-3px) scale(1.02);
+}
+.btn-contact::before {
+  content: '💌';
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+.btn-contact:hover::before {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.demande-resa-note {
+  margin-top: 3rem;
+  font-size: 1rem;
+  color: rgba(42, 36, 34, 0.85);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+.demande-resa-note strong {
+  font-weight: 600;
+  color: #255f48;
+}
+
+/* bloc logos */
+.booking-links {
+  margin-top: 2.5rem;
+}
+
+.booking-links p {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2a2422;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.4rem;
+}
+
+.booking-links .logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* cercle rond sans espace intérieur */
+.booking-links a {
+  display: inline-block;
+  width: 120px; /* tu peux augmenter ici si tu veux plus grand */
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border: none; /* ✅ supprime le contour blanc */
+  background: none; /* ✅ supprime le fond ajouté */
+  padding: 0; /* ✅ supprime les marges internes */
+}
+
+.booking-links a:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* image remplit entièrement le cercle */
+.booking-links img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ l’image remplit tout */
+  border-radius: 50%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.booking-links a:hover img {
+  transform: scale(1.05);
+}
+
+/* responsive */
+@media (max-width: 720px) {
+  .contact-section {
+    padding: 3rem 1rem 1.2rem; 
+  }
+  .contact-actions {
+    padding: 2rem 1.4rem 1.8rem;
+  }
+  .btn-contact {
+    width: 100%;
+    justify-content: center;
+  }
+  .booking-links .logos {
+    gap: 1.2rem;
+  }
+  .booking-links a {
+    width: 85px;
+    height: 85px;
+  }
+
+}
+
+
+
+
+
+
+/* =========================================================
+
+                      Footer
+              
+========================================================== */
+.site-footer {
+  background-color: #255f48;
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  border-top: 3px solid #cbe3d8;
+  padding: 2.5rem 1rem 2rem;
+}
+
+/* Ligne du haut */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 1.8rem;
+  flex-wrap: wrap;
+}
+
+/* Logo */
+.footer-left .footer-logo img {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1.05) contrast(110%);
+  transition: transform 0.3s ease;
+}
+.footer-left .footer-logo img:hover {
+  transform: scale(1.08);
+}
+.footer-left .footer-logo span {
+  color: #cbe3d8;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+/* Lien Google */
+.footer-right .google-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: #cbe3d8;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 1rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: 0.6rem;
+}
+
+.footer-right .google-link:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.avis-icon {
+  width: 90px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: brightness(0) saturate(100%) invert(87%) sepia(8%) saturate(346%)
+    hue-rotate(97deg) brightness(98%) contrast(92%);
+}
+
+.footer-right .google-link:hover .avis-icon {
+  transform: scale(1.1);
+  color: #fff;
+}
+
+/* === BAS DU FOOTER === */
+.footer-bottom {
+  border-top: 1.5px solid rgba(255, 255, 255, 0.15);
+  padding-top: 2.2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Liens légaux en bas */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+.footer-links a {
+  color: #cbe3d8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.footer-links a:hover {
+  color: #fff;
+}
+.footer-links span {
+  color: #cbe3d8;
+  opacity: 0.8;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Copyright */
+.footer-bottom .copyright {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.libellule-link img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.libellule-link img:hover {
+  transform: scale(1.15);
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 750px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}

@@ -1,0 +1,181 @@
+:root {
+  --vert: #255f48;
+  --texte: #2a2422;
+  --fond: #f7f7f5;
+  --clair: #ffffff;
+}
+
+/* ===============================
+   STYLE GLOBAL (pages légales)
+   =============================== */
+main#mentions-legales,
+main#cgu,
+main#politique-confidentialite {
+  max-width: 900px;
+  margin: 2.5rem auto 3rem;
+  padding: 0 1.5rem;
+  background: transparent;
+  color: var(--texte);
+  padding-top: 6rem; /* espace sous le header fixe */
+}
+
+/* TITRES PRINCIPAUX */
+#mentions-legales h1,
+#cgu h1,
+#politique-confidentialite h1 {
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  color: var(--vert);
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+#mentions-legales .divider,
+#cgu .divider,
+#politique-confidentialite .divider {
+  width: 80px;
+  height: 3px;
+  background: var(--vert);
+  border-radius: 2px;
+  margin: 0 auto 2rem;
+}
+
+#mentions-legales .intro,
+#cgu .intro,
+#politique-confidentialite .intro {
+  color: rgba(42, 36, 34, 0.8);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* BLOCS CONTENUS (effet verre givré) */
+#mentions-legales section,
+#cgu section,
+#politique-confidentialite section {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 1rem;
+  padding: 1.6rem 1.75rem;
+  margin-bottom: 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* HOVER (uniquement sur desktop) */
+@media (hover: hover) {
+  #mentions-legales section:hover,
+  #cgu section:hover,
+  #politique-confidentialite section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* TITRES DE SECTIONS */
+#mentions-legales h2,
+#cgu h2,
+#politique-confidentialite h2 {
+  color: var(--vert);
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+/* TEXTES */
+#mentions-legales p,
+#cgu p,
+#politique-confidentialite p {
+  margin: 0.4rem 0;
+  line-height: 1.65;
+  font-size: 0.96rem;
+}
+
+#mentions-legales ul,
+#cgu ul,
+#politique-confidentialite ul {
+  margin: 0.8rem 0 0.8rem 1.2rem;
+  line-height: 1.6;
+}
+
+/* LIENS */
+#mentions-legales a,
+#cgu a,
+#politique-confidentialite a {
+  color: var(--vert);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+#mentions-legales a:hover,
+#cgu a:hover,
+#politique-confidentialite a:hover {
+  opacity: 0.8;
+}
+
+/* SPÉCIFIQUE CRÉDITS */
+#credits a {
+  word-break: break-word; /* évite les débordements sur mobile */
+}
+
+/* RESPONSIVE */
+@media (max-width: 950px) {
+  main#mentions-legales,
+  main#cgu,
+  main#politique-confidentialite {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  main#mentions-legales,
+  main#cgu,
+  main#politique-confidentialite {
+    padding-top: 5.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #mentions-legales section,
+  #cgu section,
+  #politique-confidentialite section {
+    padding: 1.25rem;
+  }
+
+  #mentions-legales h2,
+  #cgu h2,
+  #politique-confidentialite h2 {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main#mentions-legales,
+  main#cgu,
+  main#politique-confidentialite {
+    padding-top: 5rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  #mentions-legales h1,
+  #cgu h1,
+  #politique-confidentialite h1 {
+    font-size: 1.6rem;
+  }
+
+  #mentions-legales section,
+  #cgu section,
+  #politique-confidentialite section {
+    padding: 1rem;
+  }
+
+  #mentions-legales p,
+  #cgu p,
+  #politique-confidentialite p {
+    font-size: 0.9rem;
+  }
+}

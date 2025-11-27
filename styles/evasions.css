@@ -1,0 +1,196 @@
+/* Structure de base */
+.wrapper {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+}
+
+/* HERO LIGHT */
+.hero-evasion {
+  padding: 5rem 0 1rem;
+  background: linear-gradient(135deg, #f7f5f2 0%, #ffffff 100%);
+}
+
+.hero-evasion .sur-titre {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  color: #255f48;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.hero-evasion h1 {
+  font-size: clamp(2.3rem, 3vw, 3rem);
+  color: #2a2422;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.hero-evasion .intro {
+  max-width: 48rem;
+  color: #514840;
+  line-height: 1.6;
+}
+
+/* === SECTION CARTES === */
+.evasions-list {
+  padding: 8rem 0 7rem; /* plus d’air au-dessus et en dessous de la section */
+  background: #fff;
+}
+
+.cards {
+  width: min(1100px, 92%);
+  margin: 3rem auto 3rem; /* ↑↑ ajoute l’espace AVANT et APRÈS la grille */
+  display: grid;
+  gap: 1.8rem; /* espace horizontal et vertical entre les cartes, plus naturel */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* === CARTE === */
+.evasion-card {
+  background: #ffffff;
+  border: 1px solid rgba(37, 95, 72, 0.08);
+  border-radius: 1.25rem;
+  padding: 2rem 1.5rem 1.8rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.evasion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.05);
+}
+/* Vignette */
+.evasion-card img.vignette {
+  width: 100%;
+  max-width: 240px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  margin: 0.6rem auto 1.2rem; /* espace au-dessus et au-dessous de la photo */
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Badge */
+.evasion-card .badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(37, 95, 72, 0.12);
+  color: #255f48;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+
+
+/* Titre */
+.evasion-card h3 {
+  font-size: 1.25rem;
+  color: #2a2422;
+  margin-bottom: 0.5rem;
+}
+
+/* Texte */
+.evasion-card p {
+  margin: 0;
+  color: #5a524c;
+  line-height: 1.45;
+}
+
+/* Métadonnées */
+.evasion-card .meta {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: #6b645f;
+}
+
+.evasion-card .meta li::before {
+  content: '• ';
+  color: #255f48;
+}
+
+/* Lien */
+.evasion-card .lien {
+  margin-top: auto;
+  font-weight: 600;
+  color: #255f48;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.evasion-card .lien::after {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+.evasion-card .lien:hover::after {
+  transform: translateX(3px);
+}
+
+/* === BANDEAU BAS === */
+.bloc-alt {
+  background: #255f48;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.bloc-alt .wrapper {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bloc-alt h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.bloc-alt p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.btn-secondaire {
+  background: #fff;
+  color: #255f48;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondaire:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .bloc-alt .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+
+

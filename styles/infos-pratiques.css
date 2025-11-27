@@ -1,0 +1,353 @@
+/* =========================================================
+   INFOS PRATIQUES – GÎTE PORTE D
+   ========================================================= */
+
+/* Fond général de la page */
+main#infos-pratiques-page {
+  min-height: 100vh;
+  padding: 5.5rem 1.5rem 3rem;
+  background: linear-gradient(
+      rgba(203, 227, 216, 0.9),
+      rgba(203, 227, 216, 0.9)
+    ),
+    url('../../src/assets/tramedefond/bois.webp');
+  background-repeat: repeat;
+  background-size: 1500px auto;
+  background-position: top center;
+  background-attachment: scroll;
+  color: var(--texte, #2a2422);
+}
+
+/* Conteneur global */
+#infos-pratiques-page .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ====== HEADER ====== */
+
+#infos-pratiques-page .section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+/* Sur-titre au-dessus du H1 */
+#infos-pratiques-page .section-sur-titre {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(42, 36, 34, 0.6);
+  margin-bottom: 0.4rem;
+}
+
+#infos-pratiques-page h1 {
+  font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+  color: #255f48;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  letter-spacing: 1px;
+}
+
+#infos-pratiques-page .divider {
+  width: 80px;
+  height: 3px;
+  background: var(--vert, #255f48);
+  border-radius: 2px;
+  margin: 0 auto 1.4rem;
+}
+
+#infos-pratiques-page .intro {
+  font-size: 0.95rem;
+  max-width: 650px;
+  margin: 0 auto 1.6rem;
+  text-align: center;
+  line-height: 1.6;
+  color: rgba(31, 25, 23, 0.9);
+}
+
+/* Pills de faits clés */
+.key-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.fact-pill {
+  background: rgba(247, 247, 245, 0.95);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(37, 95, 72, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fact-pill span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: rgba(42, 36, 34, 0.7);
+}
+
+.fact-pill strong {
+  font-weight: 600;
+  color: #2a2422;
+}
+
+/* ====== LAYOUT PRINCIPAL ====== */
+
+.infos-layout {
+  margin-top: 1.5rem;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Colonne gauche */
+.infos-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2.6rem; /* ⇦ décale toute la colonne vers le bas */
+}
+
+/* Cartes d’infos */
+.info-card {
+  background: #ecf9f4;
+  border-radius: 18px;
+  padding: 1.6rem 1.7rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #255f48;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+.info-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: #255f48;
+  text-transform: uppercase;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+  color: #2a2422;
+  font-weight: 600;
+}
+
+.info-card p {
+  color: #2a2422;
+  line-height: 1.55;
+  margin-bottom: 0.7rem;
+  font-size: 0.93rem;
+}
+
+.info-card.info-soft {
+  background: rgba(247, 247, 245, 0.96);
+  border-left-color: rgba(37, 95, 72, 0.5);
+}
+
+/* Checklist départ */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.checklist li {
+  background: rgba(37, 95, 72, 0.08);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  width: fit-content;
+}
+
+/* ====== COLONNE DROITE : ÉQUIPEMENTS ====== */
+
+.amenities-column h2 {
+  font-size: 1.15rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2a2422;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Carte équipement */
+.amenity-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  background: rgba(247, 247, 245, 0.96);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* le rond blanc avec l’icône */
+.icon-bulle {
+  background: #ffffff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.icon-bulle img {
+  width: 55%;
+  height: auto;
+  display: block;
+}
+
+/* texte à droite de l’icône */
+.amenity-text h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.98rem;
+  color: #255f48;
+}
+
+.amenity-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #2a2422;
+  line-height: 1.45;
+}
+
+/* === BANDEAU BAS === */
+.bloc-alt {
+  background: #255f48;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.bloc-alt .wrapper {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bloc-alt h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.bloc-alt p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.btn-secondaire {
+  background: #fff;
+  color: #255f48;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondaire:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .bloc-alt .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+
+
+
+/* ====== RESPONSIVE ====== */
+
+@media (max-width: 960px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .amenities-column {
+    margin-top: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  main#infos-pratiques-page {
+    padding: 5.2rem 1.2rem 2.6rem;
+  }
+
+  .amenity-card {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .icon-bulle {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 500px) {
+  .key-facts {
+    gap: 0.5rem;
+  }
+
+  .fact-pill {
+    padding: 0.35rem 0.8rem;
+  }
+
+  .info-card {
+    padding: 1.4rem 1.3rem;
+  }
+}
+@media (max-width: 960px) {
+  .infos-column {
+    margin-top: 0; /* on annule sur mobile/tablette */
+  }
+}
+
+/* Accessibilité : limiter les animations si l’utilisateur préfère */
+@media (prefers-reduced-motion: reduce) {
+  .info-card {
+    transition: none;
+  }
+
+  .info-card:hover {
+    transform: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  }
+}
+
+
+

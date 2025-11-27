@@ -1,0 +1,355 @@
+/* ===============================
+   Page "Comment venir"
+   =============================== */
+
+main#comment-venir-page {
+  min-height: 100vh;
+  padding: 5.5rem 1.5rem 3rem;
+  /* Fond bois + vert uniquement pour cette page */
+  background: linear-gradient(
+      rgba(203, 227, 216, 0.9),
+      rgba(203, 227, 216, 0.9)
+    ),
+    url('../../src/assets/tramedefond/bois.webp');
+  background-repeat: repeat;
+  background-size: 1500px auto;
+  background-position: top center;
+  background-attachment: scroll;
+  color: var(--texte, #2a2422);
+}
+
+#comment-rendre .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Titre de section */
+#comment-rendre .section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+#comment-rendre .section-sur-titre {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(42, 36, 34, 0.7);
+  margin-bottom: 0.4rem;
+}
+
+#comment-rendre .section-header h1 {
+  font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+  color: var(--vert, #255f48);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  letter-spacing: 1px;
+}
+
+/* Petit trait sous le titre (même style que mentions / faq) */
+#comment-rendre .divider {
+  width: 80px;
+  height: 3px;
+  background: var(--vert, #255f48);
+  border-radius: 2px;
+  margin: 0 auto 1.3rem;
+}
+
+#comment-rendre .section-intro {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: rgba(42, 36, 34, 0.9);
+}
+
+/* Layout principal : bulles + bloc adresse */
+.access-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+/* Bulles */
+.access-bubbles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.bubble {
+  background: #e6f3ed;
+  border-radius: 50%;
+  width: clamp(150px, 24vw, 230px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: clamp(0.75rem, 2.5vw, 1.5rem) 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bubble:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.bubble h3 {
+  color: #1e4c3a;
+  margin: 0;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.bubble h4 {
+  margin: 0.15rem 0 0.5rem;
+  font-size: clamp(0.72rem, 1vw, 0.85rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #2a2422;
+  line-height: 1.1;
+}
+
+.bubble p {
+  margin: 0;
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  line-height: 1.35;
+  color: #333;
+  padding: 0 0.25rem;
+  word-break: break-word;
+}
+
+/* Bloc adresse / infos */
+.access-info {
+  background: rgba(247, 247, 245, 0.96);
+  border-radius: 18px;
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.access-info h2 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  color: var(--vert, #255f48);
+}
+
+.access-info h3 {
+  font-size: 1.02rem;
+  margin-top: 1.1rem;
+  margin-bottom: 0.35rem;
+  color: #2a2422;
+}
+
+.access-info p {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(42, 36, 34, 0.95);
+}
+
+.access-address {
+  font-weight: 500;
+}
+
+.access-gps {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Liens vers autres pages utiles */
+.access-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.access-btn {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 1px solid var(--vert, #255f48);
+  color: var(--vert, #255f48);
+  background: #ffffff;
+  transition: background 0.25s ease, color 0.25s ease,
+    transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.access-btn:hover {
+  background: var(--vert, #255f48);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 95, 72, 0.25);
+}
+
+.access-btn-outline {
+  background: transparent;
+}
+
+/* Carte */
+.map-figure {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 680px;
+}
+
+.map-figure img {
+  width: 100%;
+  max-width: 630px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.map-figure img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+}
+
+.map-figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: rgba(42, 36, 34, 0.8);
+}
+
+/* === BANDEAU BAS === */
+.bloc-alt {
+  background: #255f48;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.bloc-alt .wrapper {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.bloc-alt h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.bloc-alt p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.btn-secondaire {
+  background: #fff;
+  color: #255f48;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.btn-secondaire:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .bloc-alt .wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* Responsif */
+.access-order-1 { order: 1; }
+.access-order-2 { order: 2; }
+.access-order-3 { order: 3; }
+
+/* RESPONSIVE : sous 960px → bulles en premier, puis bloc info, puis carte */
+@media (max-width: 960px) {
+  .access-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .access-order-1 {
+    order: 1; /* bulles en premier */
+  }
+
+  .access-order-2 {
+    order: 2; /* bloc adresse ensuite */
+  }
+
+  .access-order-3 {
+    order: 3; /* plan en dernier */
+  }
+}
+
+
+@media (max-width: 900px) {
+  .bubble {
+    width: clamp(140px, 30vw, 200px);
+  }
+}
+
+@media (max-width: 700px) {
+  main#comment-venir-page {
+    padding-top: 5rem;
+  }
+
+  .bubble {
+    /* Sur mobile : on passe en cartes plus lisibles */
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: auto;
+    border-radius: 18px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .access-bubbles {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .access-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .access-btn {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* Respect accessibilité (optionnel) */
+@media (prefers-reduced-motion: reduce) {
+  .bubble,
+  .map-figure img,
+  .access-btn {
+    transition: none;
+  }
+
+  .bubble:hover,
+  .map-figure img:hover,
+  .access-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
