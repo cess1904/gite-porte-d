@@ -1310,6 +1310,47 @@ section[id] {
   font-weight: 600;
 }
 
+/* Tablettes / mobiles */
+@media (max-width: 768px) {
+  .avis-portd {
+    padding: 4rem 1.5rem 4.5rem;
+  }
+
+  .avis-header p {
+    font-size: 1.05rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .avis-container {
+    height: 220px;           /* plus haut pour laisser respirer le texte */
+    margin-top: 2.2rem;
+  }
+
+  .avis-card {
+    max-width: 95%;
+    padding: 1.2rem 1.6rem;
+    border-radius: 32px;
+  }
+
+  .avis-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+  .avis-container {
+    height: 260px;           /* encore un peu plus pour les très petits écrans */
+  }
+
+  .avis-card {
+    max-width: 100%;
+    padding: 1.1rem 1.4rem;
+  }
+}
+
+
 
 /* --- Galerie accordéon --- 
 .galerie-accordeon {
