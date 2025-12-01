@@ -1035,20 +1035,57 @@ section[id] {
   box-shadow: 0 8px 18px rgba(37, 95, 72, 0.18);
 }
 
-/* Responsive */
+/* Tablette / petit écran */
 @media (max-width: 900px) {
   .sejour-grid {
     grid-template-columns: 1fr;
+    max-width: 600px;        /* grille un peu moins large */
+    margin-inline: auto;
+  }
+
+  .sejour-card {
+    padding: 1.4rem 1.2rem;  /* moins de padding */
+  }
+
+  .sejour-picto {
+    width: 110px;            /* picto un peu plus petit */
   }
 }
 
-/* Responsive */
+/* Mobiles */
 @media (max-width: 600px) {
+  .sejour-section {
+    padding-bottom: 4rem;    /* un peu moins d'air en bas */
+  }
+
   .sejour-card {
-    max-width: 390px;       
-    margin-inline: auto;  
+    max-width: 340px;        /* cartes plus étroites */
+    margin-inline: auto;
+    padding: 1.1rem 1rem;    /* cartes plus compactes */
+    border-radius: 16px;
+  }
+
+  .sejour-picto {
+    width: 90px;             /* picto plus petit sur mobile */
+    margin-bottom: 0.5rem;
+  }
+
+  .sejour-card h3 {
+    font-size: 1.05rem;      /* titre un peu réduit */
+  }
+
+  .sejour-card p {
+    font-size: 0.92rem;      /* texte plus fin */
+    line-height: 1.55;
+  }
+
+  .sejour-btn {
+    padding: 0.45rem 1rem;   /* bouton plus discret */
+    font-size: 0.85rem;
+    margin-top: 0.7rem;
   }
 }
+
 
 
 
@@ -1539,8 +1576,9 @@ section[id] {
 
   #contact h2 {
     font-size: clamp(2.1rem, 6vw, 2.8rem);
-    margin-bottom: 0.4rem;
+    margin-bottom: 1.2rem;
     letter-spacing: 0.8px;
+    text-align: center; 
   }
 
   #contact .divider {
