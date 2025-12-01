@@ -1418,40 +1418,15 @@ section[id] {
 
    ======================================================== */
 
-
-.contact-section {
+#contact.contact-section {
   background: linear-gradient(180deg, #e8f3ee 0%, #ffffff 100%);
   text-align: center;
-  position: relative; 
-}
-.contact-section .intro {
-  margin-bottom: 2.5rem;
-  font-size: 1.15rem;
-  color: #2a2422;
-  opacity: 0.95;
+  position: relative;
+  padding: 5rem 1.5rem 3.2rem;
 }
 
-.contact-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 4px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #255f48, #8bbfa9);
-  content: none;
-}
-@media (max-width: 768px) {
-  .contact-section {
-    padding-top: 2rem !important;
-  }
-}
-
-
-
-.contact-section .container {
+/* Conteneur central */
+#contact .container {
   position: relative;
   z-index: 2;
   max-width: 980px;
@@ -1459,7 +1434,8 @@ section[id] {
   text-align: center;
 }
 
-.contact-section h2 {
+/* Titre */
+#contact h2 {
   color: #255f48;
   font-size: clamp(2.6rem, 5vw, 3.6rem);
   font-weight: 700;
@@ -1467,39 +1443,41 @@ section[id] {
   margin-bottom: 0.6rem;
 }
 
-
-@media (max-width: 768px) {
-  #contact h2 {
-    font-size: clamp(2.1rem, 6vw, 2.8rem);
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.8px;
-    text-align: center;
-  }
-}
-@media (max-width: 480px) {
-  #contact h2 {
-      font-size: 1.7rem;
-    line-height: 1.1;
-    letter-spacing: 0.6px;
-  }
+/* Petite barre sous le titre */
+#contact .divider {
+  display: inline-block;
+  width: 90px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #255f48, #8bbfa9);
+  margin: 0.8rem auto 2.2rem;
 }
 
-
-.contact-section .intro {
-  max-width: 650px;
-  margin: 0 auto 2.8rem;
+/* Texte d’intro (au-dessus du bouton) */
+#contact .intro {
+  max-width: 780px;          /* plus large qu’avant */
+  margin: 0 auto 2.6rem;
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.7;          /* plus aéré */
   color: #455140;
   opacity: 0.9;
 }
 
-/* bouton mail */
-.btn-contact {
+/* Bloc bouton + texte dessous */
+#contact .contact-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Bouton mail */
+#contact .btn-contact {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
+
   background: linear-gradient(135deg, #255f48 0%, #1d4b3b 100%);
   color: #fff;
   padding: 1.2rem 2.8rem;
@@ -1507,143 +1485,97 @@ section[id] {
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.02em;
+
   box-shadow: 0 8px 20px rgba(37, 95, 72, 0.25);
   transition: all 0.3s ease;
-  
+
+  /* important pour éviter que le texte déborde */
+  white-space: normal;   /* autorise 2 lignes */
+  text-align: center;
+  line-height: 1.3;
 }
-.btn-contact:hover {
+
+#contact .btn-contact::before {
+  content: "💌";
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+#contact .btn-contact:hover {
   background: linear-gradient(135deg, #2a7656 0%, #255f48 100%);
   box-shadow: 0 10px 25px rgba(37, 95, 72, 0.35);
   transform: translateY(-3px) scale(1.02);
 }
-.btn-contact::before {
-  content: '💌';
-  font-size: 1.3rem;
-  transition: transform 0.3s ease;
-}
-.btn-contact:hover::before {
+
+#contact .btn-contact:hover::before {
   transform: rotate(15deg) scale(1.1);
 }
 
-.demande-resa-note {
-  margin-top: 3rem;
+/* Texte sous le bouton */
+#contact .demande-resa-note {
+  margin-top: 0.2rem;
   font-size: 1rem;
   color: rgba(42, 36, 34, 0.85);
-  line-height: 1.5;
+  line-height: 1.7;           /* plus aéré */
   letter-spacing: 0.02em;
-  text-align: center;
-  max-width: 500px;
+  max-width: 780px;           /* même largeur que l’intro */
   margin-left: auto;
   margin-right: auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
-.demande-resa-note strong {
+
+#contact .demande-resa-note strong {
   font-weight: 600;
   color: #255f48;
 }
 
-/* bloc logos */
-.booking-links {
-  margin-top: 2.5rem;
-}
+/* ===================== RESPONSIVE ===================== */
 
-.booking-links p {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #2a2422;
-  letter-spacing: 0.02em;
-  margin-bottom: 1.4rem;
-}
-
-.booking-links .logos {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-/* cercle rond sans espace intérieur */
-.booking-links a {
-  display: inline-block;
-  width: 120px; /* tu peux augmenter ici si tu veux plus grand */
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  border: none; /* ✅ supprime le contour blanc */
-  background: none; /* ✅ supprime le fond ajouté */
-  padding: 0; /* ✅ supprime les marges internes */
-}
-
-.booking-links a:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
-}
-
-/* image remplit entièrement le cercle */
-.booking-links img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* ✅ l’image remplit tout */
-  border-radius: 50%;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.booking-links a:hover img {
-  transform: scale(1.05);
-}
-
-
-
-/* Bouton plus discret en mobile */
-
-@media (max-width: 720px) {
-  .btn-contact {
-    width: auto;                 /* pas full-width */
-    padding: 0.9rem 1.9rem;      /* légèrement plus grand */
-    font-size: 1.05rem;          /* un poil plus lisible */
-    gap: 0.55rem;                /* espace correct avec l'icône */
-    white-space: nowrap;         /* empêche le retour à la ligne */
-    margin-inline: auto;         /* centre le bouton */
-    border-radius: 45px;         /* plus joli sur mobile */
+@media (max-width: 768px) {
+  #contact.contact-section {
+    padding: 3.6rem 1.4rem 2.4rem;
   }
 
-  .btn-contact::before {
-    font-size: 1.25rem;          /* enveloppe un peu plus grande */
+  #contact h2 {
+    font-size: clamp(2.1rem, 6vw, 2.8rem);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.8px;
   }
-}
 
-/* Très petits mobiles */
-@media (max-width: 480px) {
-  .btn-contact {
-    padding: 0.8rem 1.7rem;
+  #contact .divider {
+    margin-bottom: 1.8rem;
+  }
+
+  #contact .intro,
+  #contact .demande-resa-note {
+    max-width: 100%;
+    padding: 0 0.5rem;
     font-size: 1rem;
   }
+
+  #contact .btn-contact {
+    width: 100%;              /* bouton large mais propre */
+    padding: 1rem 1.4rem;
+    font-size: 1.03rem;
+    border-radius: 45px;
+    gap: 0.5rem;
+  }
+
+  #contact .btn-contact::before {
+    font-size: 1.25rem;
+  }
 }
 
-
-/* responsive */
-@media (max-width: 720px) {
-  .contact-section {
-    padding: 3rem 1rem 1.2rem; 
-  }
-  .contact-actions {
-    padding: 2rem 1.4rem 1.8rem;
-  }
-  .btn-contact {
-    width: 100%;
-    justify-content: center;
-  }
-  .booking-links .logos {
-    gap: 1.2rem;
-  }
-  .booking-links a {
-    width: 85px;
-    height: 85px;
+@media (max-width: 480px) {
+  #contact .btn-contact {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.98rem;
   }
 
+  #contact .intro,
+  #contact .demande-resa-note {
+    font-size: 0.98rem;
+  }
 }
 
 
