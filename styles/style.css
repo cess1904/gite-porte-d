@@ -1061,7 +1061,6 @@ section[id] {
   .sejour-card {
     max-width: 340px;        /* cartes plus étroites */
     margin-inline: auto;
-    padding: 1.1rem 1rem;    /* cartes plus compactes */
     border-radius: 16px;
   }
 
