@@ -1547,12 +1547,15 @@ section[id] {
     margin-bottom: 1.8rem;
   }
 
-  #contact .intro,
-  #contact .demande-resa-note {
-    max-width: 100%;
-    padding: 0 0.5rem;
-    font-size: 1rem;
-  }
+#contact .intro,
+#contact .demande-resa-note {
+  max-width: 100%;
+  font-size: 1rem;
+  line-height: 1.7;
+  padding: 0 .5rem;
+  text-align: justify; 
+  text-justify: inter-word;
+}
 
   #contact .btn-contact {
     width: 100%;              /* bouton large mais propre */
