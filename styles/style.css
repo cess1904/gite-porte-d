@@ -1455,12 +1455,14 @@ section[id] {
 
 /* Texte d’intro (au-dessus du bouton) */
 #contact .intro {
-  max-width: 780px;          /* plus large qu’avant */
+  max-width: 900px;          /* ➜ plus large qu’avant */
   margin: 0 auto 2.6rem;
-  font-size: 1.1rem;
-  line-height: 1.7;          /* plus aéré */
+  font-size: 1.15rem;
+  line-height: 1.8;          /* ➜ plus respirant */
   color: #455140;
-  opacity: 0.9;
+  opacity: 0.95;
+  text-align: justify;        /* ➜ JUSTIFIÉ */
+  text-justify: inter-word;   /* ➜ meilleure répartition des mots */
 }
 
 /* Bloc bouton + texte dessous */
@@ -1513,15 +1515,14 @@ section[id] {
 
 /* Texte sous le bouton */
 #contact .demande-resa-note {
-  margin-top: 0.2rem;
-  font-size: 1rem;
+  max-width: 900px;          /* ➜ même largeur que l’intro */
+  margin: 2rem auto 0;
+  font-size: 1.05rem;
+  line-height: 1.8;          /* ➜ plus aéré */
   color: rgba(42, 36, 34, 0.85);
-  line-height: 1.7;           /* plus aéré */
-  letter-spacing: 0.02em;
-  max-width: 780px;           /* même largeur que l’intro */
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1.5rem;
+  text-align: justify;        /* ➜ JUSTIFIÉ */
+  text-justify: inter-word;
+  padding: 0 1rem;            /* petite marge interne pour éviter que ça touche les bords */
 }
 
 #contact .demande-resa-note strong {
