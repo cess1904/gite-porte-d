@@ -1436,7 +1436,7 @@ section[id] {
 
 /* Titre */
 #contact h2 {
-  color: #255f48;
+  color: #5f3a25;
   font-size: clamp(2.6rem, 5vw, 3.6rem);
   font-weight: 700;
   letter-spacing: 0.02em;
