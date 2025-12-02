@@ -16,7 +16,7 @@ main#politique-confidentialite {
   padding: 0 1.5rem;
   background: transparent;
   color: var(--texte);
-  padding-top: 6rem; /* espace sous le header fixe */
+  padding-top: 6rem; 
 }
 
 /* TITRES PRINCIPAUX */
@@ -118,7 +118,7 @@ main#politique-confidentialite {
 
 /* SPÉCIFIQUE CRÉDITS */
 #credits a {
-  word-break: break-word; /* évite les débordements sur mobile */
+  word-break: break-word; 
 }
 
 /* RESPONSIVE */

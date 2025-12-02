@@ -19,7 +19,7 @@ main#tarifs-page {
   padding: 5.5rem 1.5rem 3rem; /* marge haute pour passer sous le header */
 }
 
-/* HEADER de la page Tarifs (aligné avec Accès, mais adapté) */
+/* HEADER de la page Tarifs (aligné avec Accès) */
 #tarifs-page .section-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -55,7 +55,7 @@ main#tarifs-page {
 #tarifs-page .intro-tarifs {
   max-width: 650px;
   margin: 0 auto;
-  font-size: 0.88rem;   /* un chouilla plus petit */
+  font-size: 0.88rem; 
   line-height: 1.7;
   color: rgba(42, 36, 34, 0.9);
 }
@@ -80,7 +80,7 @@ main#tarifs-page {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(37, 95, 72, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  text-align: center; /* tout centré dans la carte */
+  text-align: center;
 }
 
 #tarifs-page .tarif-card:hover {
@@ -130,14 +130,14 @@ font-size: 1.1rem;
   font-style: italic;
   text-align: center;
   color: rgba(42, 36, 34, 0.7);
-  transition: all 0.25s ease; /* transition douce */
+  transition: all 0.25s ease; 
   cursor: pointer;
 }
 
 /* Effet au survol */
 #tarifs-page .horsinclu:hover {
-  color: var(--vert, #255f48); /* devient vert */
-  transform: scale(1.05);     /* légèrement plus grand */
+  color: var(--vert, #255f48); 
+  transform: scale(1.05);    
 }
 
 

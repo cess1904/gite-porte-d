@@ -34,15 +34,15 @@
 
 /* === SECTION CARTES === */
 .evasions-list {
-  padding: 8rem 0 7rem; /* plus d’air au-dessus et en dessous de la section */
+  padding: 8rem 0 7rem; 
   background: #fff;
 }
 
 .cards {
   width: min(1100px, 92%);
-  margin: 3rem auto 3rem; /* ↑↑ ajoute l’espace AVANT et APRÈS la grille */
+  margin: 3rem auto 3rem; 
   display: grid;
-  gap: 1.8rem; /* espace horizontal et vertical entre les cartes, plus naturel */
+  gap: 1.8rem; 
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
@@ -70,7 +70,7 @@
   height: 150px;
   object-fit: cover;
   border-radius: 0.8rem;
-  margin: 0.6rem auto 1.2rem; /* espace au-dessus et au-dessous de la photo */
+  margin: 0.6rem auto 1.2rem; 
   display: block;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }

@@ -280,22 +280,22 @@ main#comment-venir-page {
 .access-order-2 { order: 2; }
 .access-order-3 { order: 3; }
 
-/* RESPONSIVE : sous 960px → bulles en premier, puis bloc info, puis carte */
+/* RESPONSIVE : */
 @media (max-width: 960px) {
   .access-layout {
     grid-template-columns: 1fr;
   }
 
   .access-order-1 {
-    order: 1; /* bulles en premier */
+    order: 1; 
   }
 
   .access-order-2 {
-    order: 2; /* bloc adresse ensuite */
+    order: 2; 
   }
 
   .access-order-3 {
-    order: 3; /* plan en dernier */
+    order: 3; 
   }
 }
 
@@ -312,7 +312,7 @@ main#comment-venir-page {
   }
 
   .bubble {
-    /* Sur mobile : on passe en cartes plus lisibles */
+    /* Sur mobile  */
     width: 100%;
     max-width: 340px;
     aspect-ratio: auto;
