@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Ne pas indexer certaines pages légales
+Disallow: /cgu.html
+Disallow: /politique-de-confidentialite.html
+Disallow: /mentions-legales.html
+
+# Ne pas indexer le dossier des composants (header/footer)
+Disallow: /components/
+
+# Emplacement du sitemap (qu'on fera plus tard)
+Sitemap: https://www.giteported.com/sitemap.xml
