@@ -164,11 +164,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Parallax section AVIS (desktop uniquement)
 // ----------------------
 
+
 (function() {
   const section = document.querySelector('.avis-portd');
   if (!section) return;
 
-  // Désactiver le parallax sur mobile
   function isDesktop() {
     return window.innerWidth >= 900;
   }
@@ -176,17 +176,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   let ticking = false;
 
   function updateParallax() {
-    if (!isDesktop()) {
-      // Mobile : fond centré sans effet
-      section.style.backgroundPositionY = 'center';
-      ticking = false;
-      return;
-    }
-
-    // Desktop : parallax visible
     const rect = section.getBoundingClientRect();
-    const parallax = rect.top * -1; // intensité forte que tu aimes
-    section.style.backgroundPositionY = `${parallax}px`;
+
+    if (isDesktop()) {
+      // 💻 Parallax normal (identique à avant)
+      const parallax = rect.top * -1;
+      section.style.backgroundPositionY = `${parallax}px`;
+    } else {
+      // 📱 Micro-parallax mobile (ultra doux)
+      // rect.top varie entre 0 → -scroll
+      const soft = rect.top * -0.08; // 8% du mouvement (doux et discret)
+      section.style.backgroundPositionY = `${soft}px`;
+    }
 
     ticking = false;
   }
@@ -198,9 +199,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // Mise à jour si on change la taille de fenêtre
   window.addEventListener('resize', updateParallax);
+
+  // Position initiale
+  updateParallax();
 })();
+
   
 
 
