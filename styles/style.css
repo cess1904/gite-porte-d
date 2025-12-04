@@ -344,7 +344,6 @@ section[id] {
   position: relative;
   min-height: 100vh;
   display: grid;
-   aspect-ratio: 16 / 9; /* ajout proposé */
   place-items: center;
   text-align: center;
   overflow: hidden;
